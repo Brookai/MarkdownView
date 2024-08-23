@@ -24,6 +24,20 @@ android {
     }
 }
 
+publishing {
+    publications {
+        release(MavenPublication) {
+            from components.release
+            groupId = 'us.feras.mdv'
+            artifactId = 'markdownview'
+            version = '1.1.0'
+        }
+    }
+    repositories {
+        mavenLocal()  // For local testing
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -31,4 +45,6 @@ dependencies {
     compile 'org.markdownj:markdownj-core:0.4'
 }
 
-apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'
+apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
+
